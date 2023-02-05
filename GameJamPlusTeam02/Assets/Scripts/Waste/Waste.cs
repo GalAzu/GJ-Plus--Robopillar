@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Waste : MonoBehaviour , Icollectible
 {
-    public static event HandleGemCollected OnWasteCollected;
-    public delegate void HandleGemCollected(WasteData wasteData);
+    public static event HandleWasteCollection OnWasteCollected;
+    public delegate void HandleWasteCollection(WasteData wasteData);
     public WasteData wasteData;
-    public Towers towerToBelong;
+    public Tower towerToBelong;
     private Inventory inventory;
 
     private void Awake()
@@ -21,8 +21,8 @@ public class Waste : MonoBehaviour , Icollectible
         Destroy(gameObject);
         OnWasteCollected?.Invoke(wasteData);
         towerToBelong.wasteInRadius.Remove(this.gameObject.GetComponent<Collider>());
-        towerToBelong.wasteLeftToLight--;
+        towerToBelong.wasteLeftOnTower--;
         inventory.curCapacity += wasteData.quantityToAdd;
-        UImanager.instance.towerWaste.text = towerToBelong.wasteLeftToLight.ToString();
+        UImanager.instance.towerWaste.text = towerToBelong.wasteLeftOnTower.ToString();
     }
 }

@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int towersOnMap;
-    public void Awake()
+
+    public TowerManager towerManager { get; private set; }
+
+    private void Awake()
     {
+        towerManager = GetComponent<TowerManager>();
         instance = this;
-        towersOnMap = FindObjectsOfType<Towers>().Length;
     }
     public void GameOver()
     {
@@ -18,5 +20,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(2);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+    public void DissolveFog()
+    {
+        RenderSettings.fogDensity = Mathf.Lerp(RenderSettings.fogDensity, 0, 10);
     }
 }

@@ -15,8 +15,6 @@ public class WasteCollection : MonoBehaviour
     Inventory inventory;
     public Transform cargo1, cargo2;
     public GameObject metalSheetsForCargo;
-    public int cargo1Capacity;
-    public int cargo2Capacity;
 
     private void Start()
     {
