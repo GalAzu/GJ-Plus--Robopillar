@@ -7,4 +7,3 @@ check it on itch - https://lddevs.itch.io/robopillar
 
 https://user-images.githubusercontent.com/60822668/218862130-0ef97d2d-0f4e-4bed-8be4-2a7c62fd0c02.mp4
 
-![PthdQE](https://user-images.githubusercontent.com/60822668/218862225-29bb4a3f-1c1e-4480-83d4-d8d9c41f603f.jpg)
