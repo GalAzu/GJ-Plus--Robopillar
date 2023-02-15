@@ -13,14 +13,6 @@ public class Inventory : MonoBehaviour
     {
         UImanager.instance.garbageInventory.text = curCapacity.ToString() + "/" + totalcapacity.ToString();
     }
-    private void OnEnable()
-    {
-        Waste.OnWasteCollected += AddToInventory;
-    }
-        private void OnDisable()
-        {
-            Waste.OnWasteCollected -= AddToInventory;
-        }
     
         public void AddToInventory(WasteData wasteData)
         {

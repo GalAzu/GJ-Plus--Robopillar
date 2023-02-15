@@ -7,11 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public TowerManager towerManager { get; private set; }
+    public TowersManager _towerManager { get; private set; }
 
     private void Awake()
     {
-        towerManager = GetComponent<TowerManager>();
+        _towerManager = GetComponent<TowersManager>();
         instance = this;
     }
     public void GameOver()

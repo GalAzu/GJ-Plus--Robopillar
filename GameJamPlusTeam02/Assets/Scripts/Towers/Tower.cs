@@ -9,8 +9,13 @@ public class Tower : MonoBehaviour
     [SerializeField] private float towerDetectionRadius;
     [SerializeField] public List<Waste> wasteInRadius = new();
     [SerializeField] private LayerMask wasteMask;
+    private TowersManager _towerManager;
     public int wasteLeftOnTower = 0;
     public int towerWaste;
+    private void Awake()
+    {
+        _towerManager = FindObjectOfType<TowersManager>();  //REFACTOR
+    }
     private void Start()
     {
         Collider[] getWasteInRadiusCastColliders = Physics.OverlapSphere(transform.position, towerDetectionRadius, wasteMask);
@@ -23,21 +28,11 @@ public class Tower : MonoBehaviour
                 wasteInRadius.Add(collider.GetComponent<Waste>());
             }
         }
+        if (_towerManager != null)
+            _towerManager.AttachWasteToTower(this);
+
         towerWaste = getWasteInRadiusCastColliders.Length;
         wasteLeftOnTower = getWasteInRadiusCastColliders.Length;
-        AttachWasteToTower();
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, towerDetectionRadius);
-        
-    }
-    private void AttachWasteToTower()
-    {
-        foreach (var waste in wasteInRadius)
-        {
-            waste.AttachToTower(this);
-        }
-    }
-    public void RemoveWasteFromTower(Waste waste) => wasteInRadius.Remove(waste);
+    private void OnDrawGizmos()=> Gizmos.DrawWireSphere(transform.position, towerDetectionRadius);
 }
