@@ -65,7 +65,7 @@ public class BuildMechanics : MonoBehaviour
     {
         Instantiate(objToBuild, transform.position + transform.forward * buildDistance, player.transform.rotation);
     }
-    private IEnumerator BuildStart()
+    private IEnumerator BuildStart(Waste wasteToBuild)
     {
         //move isBuilding to this class
         if(!player.isBuilding)
@@ -83,5 +83,24 @@ public class BuildMechanics : MonoBehaviour
             FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Wall", gameObject);
         }
     }
+    private IEnumerator BuildStart()
+    {
+        //move isBuilding to this class
+        if (!player.isBuilding)
+        {
+            //BUILD START
+            Debug.Log("start build corutine");
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Build");
+            player.isBuilding = true;
+            player.rb.constraints = RigidbodyConstraints.FreezeAll;
+            yield return new WaitForSeconds(buildTime);
+            BuildObject(MetalWall);
+            player.isBuilding = false;
+            player.rb.constraints = RigidbodyConstraints.None;
+            Debug.Log("finish build corutine");
+            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Wall", gameObject);
+        }
+    }
+
 }
 

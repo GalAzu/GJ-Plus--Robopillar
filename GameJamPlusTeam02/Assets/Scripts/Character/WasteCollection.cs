@@ -24,10 +24,14 @@ public class WasteCollection : MonoBehaviour
     }
     private void Update()
     {
+        CheckWasteRaycastHandler();
+    }
+    private void CheckWasteRaycastHandler()
+    {
         var ray = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
         RaycastHit rayHit;
-        
-        if (Physics.Raycast(ray, out rayHit,rayDistance,rayMask ))
+
+        if (Physics.Raycast(ray, out rayHit, rayDistance, rayMask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * rayDistance, Color.blue);
             Debug.Log("ray hit mask");
@@ -37,7 +41,8 @@ public class WasteCollection : MonoBehaviour
                 if (!player.onHarvest) StartCoroutine(Harvest(FinishCollecting));
             }
         }
-        else Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * rayDistance,Color.red);
+        else Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * rayDistance, Color.red);
+
     }
     private IEnumerator Harvest(Action action)
     {

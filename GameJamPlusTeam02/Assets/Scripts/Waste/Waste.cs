@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Waste : MonoBehaviour , Icollectible
 {
-    public static event HandleWasteCollection OnWasteCollected;
-    public delegate void HandleWasteCollection(WasteData wasteData);
     public WasteData wasteData;
     public Tower towerToBelong;
     private Inventory inventory;
@@ -16,13 +14,20 @@ public class Waste : MonoBehaviour , Icollectible
         wasteData.name = wasteData._wasteType.ToString();
         inventory = FindObjectOfType<Inventory>();
     }
+
     public void Collect()
     {
         Destroy(gameObject);
         OnWasteCollected?.Invoke(wasteData);
-        towerToBelong.wasteInRadius.Remove(this.gameObject.GetComponent<Collider>());
+        towerToBelong.wasteInRadius.Remove(this);
         towerToBelong.wasteLeftOnTower--;
         inventory.curCapacity += wasteData.quantityToAdd;
         UImanager.instance.towerWaste.text = towerToBelong.wasteLeftOnTower.ToString();
+    }
+
+    public void AttachToTower(Tower tower)
+    {
+        if(tower != null)
+        towerToBelong = tower;
     }
 }
