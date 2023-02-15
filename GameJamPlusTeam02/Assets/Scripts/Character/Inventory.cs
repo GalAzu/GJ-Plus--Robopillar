@@ -9,6 +9,10 @@ public class Inventory : MonoBehaviour
     public int totalcapacity;
     public int curCapacity;
 
+    private void OnEnable()
+    {
+        
+    }
     private void Start()
     {
         UImanager.instance.garbageInventory.text = curCapacity.ToString() + "/" + totalcapacity.ToString();
