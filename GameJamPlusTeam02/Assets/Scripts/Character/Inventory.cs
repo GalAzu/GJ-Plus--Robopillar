@@ -8,11 +8,6 @@ public class Inventory : MonoBehaviour
     public Dictionary<WasteData, WasteInventory> wasteDictionary = new Dictionary<WasteData, WasteInventory>();
     public int totalcapacity;
     public int curCapacity;
-
-    private void OnEnable()
-    {
-        
-    }
     private void Start()
     {
         UImanager.instance.garbageInventory.text = curCapacity.ToString() + "/" + totalcapacity.ToString();

@@ -9,13 +9,9 @@ public class Tower : MonoBehaviour
     [SerializeField] private float towerDetectionRadius;
     [SerializeField] public List<Waste> wasteInRadius = new();
     [SerializeField] private LayerMask wasteMask;
-    private TowersManager _towerManager;
+    [SerializeField] private TowersManager _towerManager;
     public int wasteLeftOnTower = 0;
     public int towerWaste;
-    private void Awake()
-    {
-        _towerManager = FindObjectOfType<TowersManager>();  //REFACTOR
-    }
     private void Start()
     {
         Collider[] getWasteInRadiusCastColliders = Physics.OverlapSphere(transform.position, towerDetectionRadius, wasteMask);

@@ -58,6 +58,7 @@ public class WasteCollection : MonoBehaviour
         
         }
     }
+    
     private void FinishCollecting()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/Trash clean");
